@@ -6,7 +6,7 @@ export default function RoleSelection() {
 
 const handleRoleSelect = async (role, redirectPath) => {
   try {
-    await axios.post("http://localhost:5000/api/auth/set-role", { role }, {
+    await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/set-role`, { role }, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     });
     navigate(redirectPath);

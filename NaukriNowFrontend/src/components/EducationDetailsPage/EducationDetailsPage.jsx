@@ -121,7 +121,7 @@ const EducationDetailsPage = () => {
     setIsSubmitting(true);
     try {
       await axios.post(
-        'http://localhost:5000/api/education',
+`${import.meta.env.VITE_API_URL}/api/education`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

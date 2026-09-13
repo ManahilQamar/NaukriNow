@@ -33,7 +33,7 @@ const EmployerSignup = () => {
     setIsSubmitting(true);
     try {
       await axios.post(
-        "http://localhost:5000/api/employer",
+`${import.meta.env.VITE_API_URL}/api/employer`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

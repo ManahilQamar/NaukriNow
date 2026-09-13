@@ -87,7 +87,7 @@ const ResumeUploadPage = () => {
       formData.append("resume", file);
 
       const response = await axios.post(
-        "http://localhost:5000/api/resume/upload-resume",
+`${import.meta.env.VITE_API_URL}/api/resume/upload-resume`,
         formData,
         {
           headers: {

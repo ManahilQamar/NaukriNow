@@ -65,8 +65,8 @@ const ContactInfoPage = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:5000/api/contact', {
-          headers: { Authorization: `Bearer ${token}` }
+const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/contact`, {
+            headers: { Authorization: `Bearer ${token}` }
         });
         if (response.data.contactInfo) {
           setFormData((prev) => ({
@@ -119,8 +119,8 @@ const ContactInfoPage = () => {
     }
 
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/contact',
+    const response = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/contact`,
         {
           firstName: formData.firstName,
           lastName: formData.lastName,

@@ -42,8 +42,8 @@ export default function AddressUpdatePage() {
           setIsLoading(false);
           return;
         }
-        const res = await axios.get("http://localhost:5000/api/address", {
-          headers: { Authorization: `Bearer ${token}` }
+const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/address`, {
+            headers: { Authorization: `Bearer ${token}` }
         });
         if (res.data.address) {
           setAddress(res.data.address);
@@ -72,8 +72,8 @@ export default function AddressUpdatePage() {
     setIsSaving(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:5000/api/address", address, {
-        headers: { Authorization: `Bearer ${token}` }
+await axios.post(`${import.meta.env.VITE_API_URL}/api/address`, address, {
+          headers: { Authorization: `Bearer ${token}` }
       });
       navigate(`/resume-upload?jobId=${jobId}`);
     } catch (err) {

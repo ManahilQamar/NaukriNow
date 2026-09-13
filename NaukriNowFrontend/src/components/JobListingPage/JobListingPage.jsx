@@ -82,7 +82,7 @@ const JobListingPage = () => {
         params.append('page', currentPage);
         params.append('limit', 10);
 
-        const url = `http://localhost:5000/api/jobs?${params.toString()}`;
+const url = `${import.meta.env.VITE_API_URL}/api/jobs?${params.toString()}`;
         const response = await axios.get(url);
 
         setJobs(response.data.jobs);
