@@ -93,11 +93,11 @@ const PostJob = () => {
 
     setIsSubmitting(true);
     try {
-      const res = await axios.post(
-`${import.meta.env.VITE_API_URL}/api/jobs`,
-        submitData,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+     const res = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/jobs`,
+  submitData,
+  { headers: { Authorization: `Bearer ${token}` } }
+);
 
      if (res.status === 201) {
   setMessage("Job posted successfully! Redirecting...");

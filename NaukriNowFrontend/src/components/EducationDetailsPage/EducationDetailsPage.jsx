@@ -73,12 +73,12 @@ const EducationDetailsPage = () => {
 
     try {
       const [contactRes, addressRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/contact', {
-          headers: { Authorization: `Bearer ${token}` }
-        }).catch(() => null),
-        axios.get('http://localhost:5000/api/address', {
-          headers: { Authorization: `Bearer ${token}` }
-        }).catch(() => null),
+       axios.get(`${import.meta.env.VITE_API_URL}/api/contact`, {
+  headers: { Authorization: `Bearer ${token}` }
+}).catch(() => null),
+axios.get(`${import.meta.env.VITE_API_URL}/api/address`, {
+  headers: { Authorization: `Bearer ${token}` }
+}).catch(() => null),
       ]);
 
       const contactInfo = contactRes?.data?.contactInfo || {};
@@ -87,11 +87,11 @@ const EducationDetailsPage = () => {
       const storedResume = localStorage.getItem(`applyResume_${jobId}`);
       const resume = storedResume ? JSON.parse(storedResume) : undefined;
 
-      await axios.post(
-        'http://localhost:5000/api/jobapplications',
-        { jobId, contactInfo, address, resume },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+     await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/jobapplications`,
+  { jobId, contactInfo, address, resume },
+  { headers: { Authorization: `Bearer ${token}` } }
+);
 
       localStorage.removeItem(`applyResume_${jobId}`);
       navigate('/dashboard');
