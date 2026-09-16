@@ -15,7 +15,7 @@ const Login = () => {
   // Redirect priority:
   // 1) ProtectedRoute se aya hai to state.from pe wapas bhejo
   // 2) ?redirect=... query param diya gaya hai to wahan bhejo
-  // 3) warna naye/returning user ko role selection pe bhejo
+  // 3) warna home page pe bhejo
   const getRedirectPath = () => {
     const fromProtectedRoute = location.state?.from?.pathname;
     if (fromProtectedRoute) return fromProtectedRoute;
@@ -24,7 +24,7 @@ const Login = () => {
     const redirectParam = params.get("redirect");
     if (redirectParam) return redirectParam;
 
-    return "/select-role";
+    return "/";
   };
 
   // Normal Email/Password Login
@@ -34,8 +34,8 @@ const Login = () => {
     setError("");
 
     try {
-const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
-          method: "POST",
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
@@ -60,8 +60,8 @@ const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
   // Google Login Success
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/google`, {
-          credential: credentialResponse.credential,
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/google`, {
+        credential: credentialResponse.credential,
       });
 
       localStorage.setItem("token", data.token);
