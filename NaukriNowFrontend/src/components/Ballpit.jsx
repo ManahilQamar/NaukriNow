@@ -324,15 +324,23 @@ function L() {
   }
 }
 
+
+
+
+
+
+
+
 function TouchStart(e) {
   if (e.touches.length > 0) {
-    e.preventDefault();
     A.x = e.touches[0].clientX;
     A.y = e.touches[0].clientY;
 
+    let touchedCanvas = false;
     for (const [elem, t] of b) {
       const rect = elem.getBoundingClientRect();
       if (D(rect)) {
+        touchedCanvas = true;
         t.touching = true;
         P(t, rect);
         if (!t.hover) {
@@ -342,20 +350,23 @@ function TouchStart(e) {
         t.onMove(t);
       }
     }
+    // Sirf tab prevent karo jab touch actually Ballpit ke canvas ke andar ho
+    if (touchedCanvas) e.preventDefault();
   }
 }
 
 function TouchMove(e) {
   if (e.touches.length > 0) {
-    e.preventDefault();
     A.x = e.touches[0].clientX;
     A.y = e.touches[0].clientY;
 
+    let touchingCanvas = false;
     for (const [elem, t] of b) {
       const rect = elem.getBoundingClientRect();
       P(t, rect);
 
       if (D(rect)) {
+        touchingCanvas = true;
         if (!t.hover) {
           t.hover = true;
           t.touching = true;
@@ -363,11 +374,24 @@ function TouchMove(e) {
         }
         t.onMove(t);
       } else if (t.hover && t.touching) {
+        touchingCanvas = true;
         t.onMove(t);
       }
     }
+    // Sirf tab prevent karo jab touch actually canvas se interact kar raha ho
+    if (touchingCanvas) e.preventDefault();
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 function TouchEnd() {
   for (const [, t] of b) {
