@@ -25,8 +25,8 @@ const Signup = () => {
     setError("");
 
     try {
-const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
-          method: "POST",
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
+            method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -46,8 +46,10 @@ const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
         localStorage.setItem("user", JSON.stringify(data.user));
         const params = new URLSearchParams(window.location.search);
         const redirectPath = params.get("redirect") || "/select-role";
-        navigate(redirectPath);
-      }
+navigate("/");
+
+}
+
     } catch (err) {
       setError("Something went wrong. Please try again later.");
     } finally {
@@ -65,7 +67,7 @@ const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/goog
 
       const params = new URLSearchParams(window.location.search);
       const redirectPath = params.get("redirect") || "/select-role";
-      navigate(redirectPath);
+      navigate("/");
     } catch (err) {
       console.error("Google login failed", err);
       setError("Google login failed. Please try again.");
